@@ -86,6 +86,15 @@ public class Matrix {
 	      return clone;
 	}
 	
+	public boolean equals(Matrix matrix){
+			for(int i=0;i<this.m;i++){
+					for(int j=0;j<this.n;j++){
+							if(!this.data[i][j].equals(matrix.data[i][j])) return false;
+					}
+			}
+			return true;
+	}
+	
 	@Override
 	public String toString() {
 		String s = "[\n";
