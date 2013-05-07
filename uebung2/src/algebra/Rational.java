@@ -47,6 +47,11 @@ public class Rational implements Comparable<Rational> {
 		return new Rational(this.zaehler,this.nenner);
 	}
 	
+	public Rational(long z) {
+		this();
+		this.zaehler = z;
+	}
+	
 	public Rational(long z, long n) {
 		this();
 		long g = ggt(z,n);
@@ -114,7 +119,7 @@ public class Rational implements Comparable<Rational> {
 	}
 	
 	public static Rational mult (Rational a, Rational b) {
-		return new Rational(a).mult(b);
+		return (new Rational(a)).mult(b);
 	}
 	
 	public Rational div(Rational r) {
@@ -128,7 +133,7 @@ public class Rational implements Comparable<Rational> {
 	}
 	
 	public static Rational div(Rational a, Rational b) {
-		return new Rational(b).div(a);
+		return (new Rational(a)).div(b);
 	}
 	
 	
@@ -142,7 +147,7 @@ public class Rational implements Comparable<Rational> {
 	}
 	
 	public static int compare(Rational a, Rational b) {
-		return new Rational(a).compareTo(b);
+		return (new Rational(a)).compareTo(b);
 	}
 	
 	public Rational clone() {
@@ -195,15 +200,37 @@ public class Rational implements Comparable<Rational> {
         z = x.mult(y);
         System.out.println(z);
 
+        x = new Rational( 841, 961);
+        y = new Rational( 3037547, 3246599);
+        z = Rational.div(x,y);
+        System.out.println(z);
+        
+        
         // 1/6 - -4/-8 = -1/3
         x = new Rational( 1,  6);
         y = new Rational(-4, -8);
         z = x.sub(y);
         System.out.println(z);
         
-        x = new Rational( 1,  2);
+        //1/4
+        x = new Rational( 1, 2);
         y = new Rational( 2, 1);
         z = x.div(y);
+        System.out.println(z);
+        //1/4
+        x = new Rational( 1, 2);
+        y = new Rational( 2, 1);
+        z = Rational.div(x,y);
+        System.out.println(z);
+        //4
+        x = new Rational( 2, 1);
+        y = new Rational( 1, 2);
+        z = x.div(y);
+        System.out.println(z);
+        //4
+        x = new Rational( 2, 1);
+        y = new Rational( 1, 2);
+        z = Rational.div(x,y);
         System.out.println(z);
 	}
 }

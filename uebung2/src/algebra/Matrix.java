@@ -79,6 +79,12 @@ public class Matrix {
 		return this;
 	}
 	
+	public Matrix multrow(int row, Rational r) {
+		for (int j = 0; j < n; j++) {
+			this.data[row][j].mult(r);
+		}
+		return this;
+	}
 	
 	public int max(int column, int start) {
 		int max_index = start;
@@ -100,6 +106,8 @@ public class Matrix {
 	            clone.data[i][j] = this.data[i][j];
 	         }
 	      }
+	      clone.m = this.m;
+	      clone.n = this.n;
 	      return clone;
 	}
 	
