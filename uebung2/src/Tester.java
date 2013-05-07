@@ -13,7 +13,7 @@ public class Tester {
 		Matrix gauss_matrix = null;
 		
 		//Test Arguments and Test Data
-		if(args.length==0) {Tester.readFile("data.dat");}//return;
+		if(args.length==0) return;
 		else {Tester.readFile(args[0]);}
 		if(data_vector==null || data_matrix==null) return;
 		
@@ -131,7 +131,7 @@ public class Tester {
 		System.out.println("Vec:\n"+gauss_vector.toString());
 		System.out.println("Mat:\n"+gauss_matrix.toString());
 		try{
-			System.out.println("Gauß:\n"+algebra.gaussJordan(gauss_matrix, gauss_vector));
+			System.out.println("Gauß:\n"+Algebra.gaussJordan(gauss_matrix, gauss_vector));
 		}catch(IllegalArgumentException e){
 			System.out.println("Matrix nicht lösbar: "+ e.getMessage());			
 		}

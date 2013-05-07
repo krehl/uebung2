@@ -4,8 +4,8 @@ public class Matrix {
 
 	private Rational[][] data;
 	
-	private int m;
-	private int n;
+	private int m; //rows
+	private int n; //columns
 	
 	public Matrix(Rational[][] data) {
 		this.data = data;
@@ -22,6 +22,8 @@ public class Matrix {
 	
 	public Matrix() {
 		this.data = null;
+		this.m = 0;
+		this.n = 0;
 	}
 	
 	public Matrix(int m, int n) {
@@ -30,10 +32,10 @@ public class Matrix {
 		data = new Rational[m][n];
 	}
 	
-	public Matrix(int m) {
-		this.m = m;
-		this.n = 1;
-		data = new Rational[m][1];
+	public Matrix(int n) {
+		this.m = 1;
+		this.n = n;
+		data = new Rational[1][n];
 	}
 	
 	public Matrix(int m, int n, Rational r) {
@@ -57,6 +59,8 @@ public class Matrix {
 
 	public Matrix setData(Rational[][] data) {
 		this.data = data;
+		this.m = data.length;
+		this.n = data[0].length;
 		return this;
 	}
 	
@@ -73,6 +77,19 @@ public class Matrix {
 		this.data[a] = this.data[b];
 		this.data[b] = tmp;
 		return this;
+	}
+	
+	
+	public int max(int column, int start) {
+		int max_index = start;
+		Rational max = this.data[start][column].abs();
+		for (int i = start + 1; i < this.m; i++) {
+			if (max.compareTo(this.data[i][column].abs()) == -1) {// ***************
+				max = this.data[i][column].abs();
+				max_index = i;
+			}
+		}
+		return max_index;
 	}
 	
 	@Override

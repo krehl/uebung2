@@ -67,6 +67,14 @@ public class testclass {
         y = new Rational(-4, -8);
         z = x.sub(y);
         System.out.println(z);
+        
+      
+    	Rational[][] B = {{new Rational(1,1),new Rational(2,1),new Rational(3,1)},{new Rational(4,1),new Rational(5,1),new Rational(6,1)},{new Rational(7,1),new Rational(8,1),new Rational(5,1)}};
+    	Matrix A = new Matrix(B);
+    	System.out.println(A.toString());
+    	Matrix C = Algebra.gauss(A);
+    	System.out.println(C.toString());
+    	
 
 	}
 	

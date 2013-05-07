@@ -12,7 +12,8 @@ public class Rational implements Comparable<Rational> {
 		return a;
 	}
 	
-	private long zaehler, nenner;
+	private long zaehler = 0;
+	private long nenner = 1;
 	
 	//private static Rational zero = new Rational(0,1);
 	
@@ -39,6 +40,13 @@ public class Rational implements Comparable<Rational> {
 		this.nenner = 1;
 	}
 
+	public Rational abs() {
+		if (zaehler < 0) {
+			return new Rational(-this.zaehler,this.nenner);
+		}
+		return new Rational(this.zaehler,this.nenner);
+	}
+	
 	public Rational(long z, long n) {
 		this();
 		long g = ggt(z,n);
@@ -78,6 +86,7 @@ public class Rational implements Comparable<Rational> {
 		long g = ggt(this.zaehler,this.nenner);
 		this.zaehler = zaehler / g;
 		this.nenner = nenner / g;
+		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 		return this;
 	}
 	
@@ -100,6 +109,7 @@ public class Rational implements Comparable<Rational> {
 		long g = ggt(this.zaehler,this.nenner);
 		this.zaehler = zaehler / g;
 		this.nenner = nenner / g;
+		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 		return this;
 	}
 	
@@ -113,12 +123,14 @@ public class Rational implements Comparable<Rational> {
 		long g = ggt(this.zaehler,this.nenner);
 		this.zaehler = zaehler / g;
 		this.nenner = nenner / g;
+		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 		return this;
 	}
 	
 	public static Rational div(Rational a, Rational b) {
-		return new Rational(a).div(b);
+		return new Rational(b).div(a);
 	}
+	
 	
 	public int compareTo(Rational b) {
         Rational a = this;
@@ -187,6 +199,11 @@ public class Rational implements Comparable<Rational> {
         x = new Rational( 1,  6);
         y = new Rational(-4, -8);
         z = x.sub(y);
+        System.out.println(z);
+        
+        x = new Rational( 1,  2);
+        y = new Rational( 2, 1);
+        z = x.div(y);
         System.out.println(z);
 	}
 }
