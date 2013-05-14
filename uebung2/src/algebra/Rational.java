@@ -1,7 +1,8 @@
 package algebra;
 
 public class Rational implements Comparable<Rational> {
-
+	
+	//Berechnet den größten gemeinsamen Teiler, Hilfsfunktion
 	public static long ggt(long a, long b) {
 		long h;
 		while (!(b == 0)) {
@@ -12,34 +13,41 @@ public class Rational implements Comparable<Rational> {
 		return a;
 	}
 	
+	//Daten
 	private long zaehler = 0;
 	private long nenner = 1;
 	
 	//private static Rational zero = new Rational(0,1);
 	
+	//Liefert den Zaehler zurueck
 	public long getZaehler() {
 		return this.zaehler;
 	}
 	
+	//Liefert den Nenner zurueck
 	public long getNenner() {
 		return this.nenner;
 	}
 	
+	//Setzt den Zaehler
 	public Rational setZaehler(long l) {
 		this.zaehler = l;
 		return this;
 	}
 	
+	//Setzt den Nenner
 	public Rational setNenner(long l) {
 		this.nenner = l;
 		return this;
 	}
 	
+	//Default Konstruktor
 	public Rational() {
 		this.zaehler = 0;
 		this.nenner = 1;
 	}
-
+	
+	//Berechnet den Absolutbetrag einer rationalen Zahl
 	public Rational abs() {
 		if (zaehler < 0) {
 			return new Rational(-this.zaehler,this.nenner);
@@ -47,11 +55,13 @@ public class Rational implements Comparable<Rational> {
 		return new Rational(this.zaehler,this.nenner);
 	}
 	
+	//Konstruktor
 	public Rational(long z) {
 		this();
 		this.zaehler = z;
 	}
 	
+	//Konstruktor
 	public Rational(long z, long n) {
 		this();
 		long g = ggt(z,n);
@@ -60,18 +70,22 @@ public class Rational implements Comparable<Rational> {
 		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 	}
 	
+	//Konstruktor
 	public Rational (Rational r) {
 		this();
 		this.zaehler = r.zaehler;
 		this.nenner = r.nenner;
 	}
 	
+	//Schreibt beide Elemente der rationalen Zahl
 	public Rational set(Rational r) {
 		this.zaehler = r.zaehler;
 		this.nenner = r.nenner;
 		return this;
 	}
 	
+	//Schreibt die Zahl als String, Überschreibt die geerbte Methode
+	@Override
 	public String toString() {
 		if (this.zaehler == 0) {
 			return "0";
@@ -81,10 +95,12 @@ public class Rational implements Comparable<Rational> {
 		return Long.toString(this.zaehler) + "/" + Long.toString(this.nenner); 
 	}
 	
-	public boolean equals(Rational r) { //muss noch überarbeitet werden
+	//Prüft mathematische Gleichheit zweier r. Zahlen
+	public boolean equals(Rational r) {
 		return (this.zaehler*r.nenner) == (r.zaehler*this.nenner);
 	}
 	
+	//addiert eine zahl auf die andere
 	public Rational add(Rational r) {
 		this.zaehler = this.zaehler * r.nenner + this.nenner * r.zaehler;
 		this.nenner = this.nenner * r.nenner;
@@ -95,19 +111,22 @@ public class Rational implements Comparable<Rational> {
 		return this;
 	}
 	
+	//Klassenmethode add, erzeugt eine neue r.Zahl als ergebnis
 	public static Rational add(Rational a, Rational b) {
 		return new Rational(a).add(b);
 	}
 	
+	//subtrahiert eine zahl von der anderen
 	public Rational sub(Rational r) {
 		this.add(new Rational(-r.zaehler,r.nenner));
 		return this;
 	}
-	
+	//Klassenmethode, erzeugt eine neue zahl c=a-b
 	public static Rational sub(Rational a, Rational b) {
 		return new Rational(a).sub(b);
 	}
 	
+	//multipliziert r auf die Zahl
 	public Rational mult(Rational r) {
 		this.zaehler *= r.zaehler;
 		this.nenner *= r.nenner;
@@ -117,11 +136,12 @@ public class Rational implements Comparable<Rational> {
 		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 		return this;
 	}
-	
+	//Klassenmethode, erzeugt eine neue Zahl c = a*b
 	public static Rational mult (Rational a, Rational b) {
 		return (new Rational(a)).mult(b);
 	}
 	
+	//Dividiert eine Zahl durch die andere
 	public Rational div(Rational r) {
 		this.zaehler *= r.nenner;
 		this.nenner *= r.zaehler;
@@ -131,12 +151,12 @@ public class Rational implements Comparable<Rational> {
 		if (nenner < 0) { nenner = -nenner; zaehler = -zaehler; }
 		return this;
 	}
-	
+	//Klassenmetjode c = a/b
 	public static Rational div(Rational a, Rational b) {
 		return (new Rational(a)).div(b);
 	}
 	
-	
+	//Vergleicht zwei Zahlen, wenn a > b -> -1
 	public int compareTo(Rational b) {
         Rational a = this;
         long links = a.zaehler * b.nenner;
@@ -145,22 +165,22 @@ public class Rational implements Comparable<Rational> {
         if (links > rechts) return +1;
         return 0;
 	}
-	
+	//Vergleicht zwei Zahlen, wenn a > b -> -1
 	public static int compare(Rational a, Rational b) {
 		return (new Rational(a)).compareTo(b);
 	}
-	
+	//klont eine zahl
 	public Rational clone() {
 		return new Rational(this.zaehler, this.nenner);
 	}
-	
+	//nutzt ggt um eine zahl zu kuerzen
 	public Rational kuerzen() {
 		long a = ggt(this.zaehler, this.nenner);
 		this.zaehler = this.zaehler / a;
 		this.nenner = this.nenner / a;
 		return this;
 	}
-	
+	//Testmethode
 	public static void main(String[] args) { //Test
         Rational x, y, z;
 

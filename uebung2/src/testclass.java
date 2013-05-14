@@ -7,9 +7,13 @@ import java.io.*;
 public class testclass {
 
 	public static void main(String[] args) {
+		if (args.length == 0) { //wenn keine datei angegeben wurde, abbrechen
+			System.out.println("Usage: java testclass filename");
+			return;
+		}
     	try {
-    		BufferedReader in = new BufferedReader(new FileReader("C:/Users/Konstantin Krehl/git/uebung2/uebung2/src/data.dat"));
-    		try {
+    		BufferedReader in = new BufferedReader(new FileReader(args[0]));
+    		try { //Die werte werden zunächst in einem Array zwischengespeichert
     			String[] b = in.readLine().split(" ");
     			String[][] A = new String[b.length][b.length];
     			for (int j = 0; j<b.length;j++) {
@@ -28,10 +32,13 @@ public class testclass {
     				}
     			}
     			
-    			System.out.println(AA);
-    			System.out.println(BB);
-    			
-    			System.out.println(Algebra.gauss(AA, BB));
+    			System.out.println(AA);// 1 2 3, 5 6 7, 9 10 5
+    			System.out.println(BB);// 4,8,12
+    			try {
+    			System.out.println(Algebra.gauss(AA, BB));} //-2,3,0
+    			catch (IllegalArgumentException e){
+    				e.printStackTrace();
+    			}
     			
     			Rational x, y, z;
 
@@ -78,10 +85,11 @@ public class testclass {
     	        System.out.println(z);
     	    
     		}
-    		finally {
+    		finally { //in jedem Fall sollte die Datei wieder geschlossen werden
     		in.close(); }
-    	} catch (IOException e) {
-    		e.printStackTrace();
+    	} catch (IOException e) { //Fehler im Zusammenhang mit dem Dateipfad abfangen
+    		System.out.println("Could not open file");
+    		//e.printStackTrace();
     	}
 	}
 }
